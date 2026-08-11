@@ -39,7 +39,7 @@ export default function PriceRange({ label, min, max, step, value, onChange }: P
             padding: '3px 10px',
             borderRadius: 999,
             whiteSpace: 'nowrap',
-            boxShadow: '0 6px 14px rgba(30,168,50,0.35)',
+            boxShadow: '0 6px 14px rgba(245, 166, 35,0.35)',
           }}
         >
           {compact(value.min)} - {compact(value.max)}

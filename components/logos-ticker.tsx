@@ -38,7 +38,7 @@ export default function LogosTicker({ ticker }: { ticker: Dictionary['ticker'] }
               className="flex items-center gap-2.5"
               style={{ color: 'rgba(255,255,255,0.42)', fontSize: 15, fontFamily: 'var(--font-heading)', fontWeight: 600, letterSpacing: 0.2 }}
             >
-              <Icon width={17} height={17} style={{ color: 'rgba(30,168,50,0.75)' }} />
+              <Icon width={17} height={17} style={{ color: 'rgba(245, 166, 35,0.75)' }} />
               {label}
             </span>
           ))}

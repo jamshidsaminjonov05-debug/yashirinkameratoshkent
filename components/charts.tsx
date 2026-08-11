@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 
 // ── Mini sparkline SVG ──────────────────────────────────────────────────────
-export function Sparkline({ color = '#1ea832', up = true }: { color?: string; up?: boolean }) {
+export function Sparkline({ color = '#f5a623', up = true }: { color?: string; up?: boolean }) {
   const d = up
     ? 'M0 20 Q10 18 20 15 Q30 12 40 16 Q50 20 60 10 Q70 4 80 6'
     : 'M0 6 Q10 10 20 14 Q30 18 40 12 Q50 8 60 16 Q70 20 80 18'
@@ -27,7 +27,7 @@ export function MiniBarChart() {
           className="rounded-t-sm bar-animate"
           style={{
             width: 14,
-            background: i === 5 ? '#1ea832' : 'rgba(30,168,50,0.35)',
+            background: i === 5 ? '#f5a623' : 'rgba(245, 166, 35,0.35)',
             '--bar-h': b.h + 'px',
             '--bar-delay': b.delay,
             height: b.h,

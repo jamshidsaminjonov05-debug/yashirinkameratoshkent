@@ -1,17 +1,22 @@
 @import 'tailwindcss';
 
 :root {
-  --bg: #09090f;
-  --bg-card: #111119;
-  --bg-card2: #18181f;
-  /* Brend yashili - logotipdagi rang (YASHIRIN CAMERA) */
-  --brand: #1ea832;
-  --brand-glow: rgba(30, 168, 50, 0.25);
-  --brand-dim: rgba(30, 168, 50, 0.12);
-  --text: #f0f0f5;
-  --text-muted: #7a7a8c;
+  /* Fon - logotipdagi to'q ranglar oilasi (#221e27) */
+  --bg: #141118;
+  --bg-card: #1c1822;
+  --bg-card2: #221e27;
+  /* Brend sarig'i - logotipdagi yon "shoxlar" rangi */
+  --brand: #f5a623;
+  --brand-glow: rgba(245, 166, 35, 0.25);
+  --brand-dim: rgba(245, 166, 35, 0.12);
+  /* Brend kulrangi - logotipdagi patlar va tumshuq rangi */
+  --brand-silver: #a4a8ad;
+  /* Sariq fon ustidagi matn (qorong'i) */
+  --on-brand: #1b1710;
+  --text: #f2f0f5;
+  --text-muted: #86828f;
   --border: rgba(255, 255, 255, 0.07);
-  --border-brand: rgba(30, 168, 50, 0.5);
+  --border-brand: rgba(245, 166, 35, 0.5);
   /* next/font orqali yuklanadi (app/fonts.ts).
      Outfit'da kirill harflari yo'q - rus matnlari uchun Inter zaxira bo'ladi. */
   --font-heading: var(--font-outfit), var(--font-inter), 'Segoe UI', sans-serif;
@@ -29,12 +34,12 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   scrollbar-width: thin;
-  scrollbar-color: rgba(30, 168, 50, 0.3) transparent;
+  scrollbar-color: rgba(245, 166, 35, 0.3) transparent;
 }
 
 body::-webkit-scrollbar { width: 4px; }
 body::-webkit-scrollbar-track { background: transparent; }
-body::-webkit-scrollbar-thumb { background: rgba(30, 168, 50, 0.3); border-radius: 2px; }
+body::-webkit-scrollbar-thumb { background: rgba(245, 166, 35, 0.3); border-radius: 2px; }
 
 h1, h2, h3, h4, h5 {
   font-family: var(--font-heading);
@@ -131,7 +136,7 @@ h1, h2, h3, h4, h5 {
     position: relative;
     display: inline-flex;
     align-items: center;
-    padding: calc(var(--bh) * 0.09) calc(var(--bh) * 0.22);
+    gap: calc(var(--bh) * 0.26);
     font-family: var(--font-heading);
     color: #fff;
     line-height: 1;
@@ -140,28 +145,12 @@ h1, h2, h3, h4, h5 {
   }
 
   .brand-mark[data-tone='dark'] {
-    color: #14181d;
+    color: #1b1710;
   }
 
-  .brand-mark__corner {
-    position: absolute;
-    width: calc(var(--bh) * 0.3);
-    height: calc(var(--bh) * 0.38);
-    border: 0 solid currentColor;
-  }
-
-  .brand-mark__corner--tl {
-    top: 0;
-    left: 0;
-    border-top-width: calc(var(--bh) * 0.07);
-    border-left-width: calc(var(--bh) * 0.07);
-  }
-
-  .brand-mark__corner--br {
-    right: 0;
-    bottom: 0;
-    border-right-width: calc(var(--bh) * 0.07);
-    border-bottom-width: calc(var(--bh) * 0.07);
+  /* Yorug' fonda och sariq o'qilmaydi - to'qroq variant */
+  .brand-mark[data-tone='dark'] .brand-mark__sub {
+    color: #8a5a06;
   }
 
   .brand-mark__stack {
@@ -171,22 +160,20 @@ h1, h2, h3, h4, h5 {
   }
 
   .brand-mark__name {
-    font-size: calc(var(--bh) * 0.47);
+    font-size: calc(var(--bh) * 0.45);
     font-weight: 900;
-    letter-spacing: 0.005em;
-    padding-bottom: calc(var(--bh) * 0.07);
-    border-bottom: calc(var(--bh) * 0.05) solid currentColor;
+    letter-spacing: 0.01em;
   }
 
   .brand-mark__sub {
-    margin-top: calc(var(--bh) * 0.1);
+    margin-top: calc(var(--bh) * 0.12);
     font-size: calc(var(--bh) * 0.2);
     font-weight: 700;
-    letter-spacing: calc(var(--bh) * 0.062);
+    color: var(--brand);
+    letter-spacing: calc(var(--bh) * 0.098);
     /* Harflar orasidagi bo'shliq oxirgi harfdan keyin ham qo'shiladi -
        matnni qayta markazlash uchun shuncha o'ngga suramiz. */
-    text-indent: calc(var(--bh) * 0.062);
-    text-align: center;
+    text-indent: calc(var(--bh) * 0.098);
   }
 
   .card {
@@ -198,12 +185,12 @@ h1, h2, h3, h4, h5 {
 
   .card-brand-border {
     border-color: var(--border-brand);
-    box-shadow: 0 0 24px var(--brand-glow), inset 0 0 24px rgba(30, 168, 50, 0.04);
+    box-shadow: 0 0 24px var(--brand-glow), inset 0 0 24px rgba(245, 166, 35, 0.04);
   }
 
   .btn-primary {
     background: var(--brand);
-    color: #fff;
+    color: var(--on-brand);
     font-family: var(--font-heading);
     font-weight: 600;
     border-radius: 999px;
@@ -220,7 +207,7 @@ h1, h2, h3, h4, h5 {
 
   .btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 8px 32px rgba(30, 168, 50, 0.4);
+    box-shadow: 0 8px 32px rgba(245, 166, 35, 0.4);
   }
 
   .btn-secondary {
@@ -250,7 +237,7 @@ h1, h2, h3, h4, h5 {
   }
 
   .card-hover:hover {
-    border-color: rgba(30, 168, 50, 0.35);
+    border-color: rgba(245, 166, 35, 0.35);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
   }
 
@@ -273,7 +260,7 @@ h1, h2, h3, h4, h5 {
     justify-content: center;
     gap: 8px;
     background:
-      radial-gradient(ellipse at 50% 30%, rgba(30, 168, 50, 0.12), transparent 65%),
+      radial-gradient(ellipse at 50% 30%, rgba(245, 166, 35, 0.12), transparent 65%),
       repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 12px, rgba(255, 255, 255, 0.05) 12px 24px);
     color: var(--text-muted);
     font-size: 12px;
@@ -324,7 +311,7 @@ h1, h2, h3, h4, h5 {
   .check-icon {
     width: 28px;
     height: 28px;
-    color: #fff;
+    color: var(--on-brand);
     background: var(--brand);
     border-radius: 6px;
     display: flex;
@@ -356,7 +343,7 @@ h1, h2, h3, h4, h5 {
     top: 0;
     z-index: 999;
     background: var(--brand);
-    color: #fff;
+    color: var(--on-brand);
     padding: 10px 16px;
     border-radius: 0 0 8px 0;
     font-size: 14px;
@@ -376,8 +363,10 @@ h1, h2, h3, h4, h5 {
     --shop-text: #17171a;
     --shop-muted: #8b8b93;
     --shop-border: #ededf0;
-    --shop-accent: #1ea832;
-    --shop-soft: #e9f8ed;
+    --shop-accent: #f5a623;
+    /* Oq fonda o'qish uchun to'qroq sariq (matn va havolalar) */
+    --shop-ink: #8a5a06;
+    --shop-soft: #fdf1dc;
 
     min-height: 100vh;
     background: var(--shop-bg);
@@ -436,7 +425,7 @@ h1, h2, h3, h4, h5 {
 
   .shop-nav-item[data-active='true'] {
     background: var(--shop-soft);
-    color: #15803d;
+    color: #8a5a06;
     font-weight: 600;
   }
 
@@ -457,7 +446,7 @@ h1, h2, h3, h4, h5 {
 
   .shop-sub-item[data-active='true'] {
     background: var(--shop-soft);
-    color: #15803d;
+    color: #8a5a06;
     font-weight: 600;
   }
 
@@ -482,7 +471,7 @@ h1, h2, h3, h4, h5 {
 
   .shop-input:focus {
     border-color: var(--shop-accent);
-    box-shadow: 0 0 0 3px rgba(30, 168, 50, 0.14);
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.14);
   }
 
   .shop-input::placeholder {
@@ -526,13 +515,13 @@ h1, h2, h3, h4, h5 {
     cursor: pointer;
     text-decoration: none;
     background: var(--shop-accent);
-    color: #fff;
+    color: var(--on-brand);
     transition: box-shadow 0.2s, background 0.2s;
   }
 
   .shop-btn:hover {
-    background: #178a2a;
-    box-shadow: 0 10px 24px rgba(30, 168, 50, 0.32);
+    background: #e0940f;
+    box-shadow: 0 10px 24px rgba(245, 166, 35, 0.32);
   }
 
   .shop-btn--ghost {
@@ -562,14 +551,14 @@ h1, h2, h3, h4, h5 {
 
   .shop-icon-btn:hover {
     background: var(--shop-soft);
-    border-color: rgba(30, 168, 50, 0.4);
-    color: var(--shop-accent);
+    border-color: rgba(245, 166, 35, 0.4);
+    color: var(--shop-ink);
   }
 
   .shop-icon-btn[data-active='true'] {
     background: var(--shop-accent);
     border-color: var(--shop-accent);
-    color: #fff;
+    color: var(--on-brand);
   }
 
   .shop-checkbox {
@@ -629,7 +618,7 @@ h1, h2, h3, h4, h5 {
 
   .image-placeholder--light {
     background:
-      radial-gradient(ellipse at 50% 30%, rgba(30, 168, 50, 0.1), transparent 65%),
+      radial-gradient(ellipse at 50% 30%, rgba(245, 166, 35, 0.1), transparent 65%),
       repeating-linear-gradient(135deg, #f4f4f6 0 12px, #eeeef1 12px 24px);
     color: #a1a1aa;
   }
@@ -748,7 +737,7 @@ h1, h2, h3, h4, h5 {
   .hero-glow {
     width: 340px;
     height: 340px;
-    background: rgba(30, 168, 50, 0.16);
+    background: rgba(245, 166, 35, 0.16);
     top: -110px;
     left: 50%;
     transform: translateX(-50%);
@@ -769,8 +758,8 @@ h1, h2, h3, h4, h5 {
   }
 
   .hero-badge--new {
-    background: #1ea832;
-    color: #fff;
+    background: var(--brand);
+    color: var(--on-brand);
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 12px;
@@ -848,7 +837,7 @@ h1, h2, h3, h4, h5 {
     right: -10%;
     bottom: 0;
     height: 22%;
-    background: linear-gradient(to bottom, rgba(9, 9, 15, 0) 0%, var(--bg) 92%);
+    background: linear-gradient(to bottom, rgba(20, 17, 24, 0) 0%, var(--bg) 92%);
     pointer-events: none;
   }
 
@@ -989,7 +978,7 @@ h1, h2, h3, h4, h5 {
     width: 130%;
     height: 80%;
     transform: translateX(-50%);
-    background: radial-gradient(ellipse at center, rgba(30, 168, 50, 0.16), transparent 68%);
+    background: radial-gradient(ellipse at center, rgba(245, 166, 35, 0.16), transparent 68%);
     pointer-events: none;
   }
 
@@ -1052,9 +1041,9 @@ h1, h2, h3, h4, h5 {
   }
 
   .bento-row--active {
-    background: linear-gradient(90deg, #1ea832, #3ad053);
+    background: linear-gradient(90deg, #f5a623, #ffc861);
     border-color: transparent;
-    box-shadow: 0 10px 26px rgba(30, 168, 50, 0.28);
+    box-shadow: 0 10px 26px rgba(245, 166, 35, 0.28);
   }
 
   .bento-row__icon {
@@ -1063,7 +1052,7 @@ h1, h2, h3, h4, h5 {
     color: rgba(255, 255, 255, 0.55);
   }
 
-  .bento-row--active .bento-row__icon { color: #fff; }
+  .bento-row--active .bento-row__icon { color: var(--on-brand); }
 
   .bento-row__id {
     font-size: 11.5px;
@@ -1075,7 +1064,7 @@ h1, h2, h3, h4, h5 {
   .bento-row--active .bento-row__id,
   .bento-row--active .bento-row__label,
   .bento-row--active .bento-row__dot {
-    color: #fff;
+    color: var(--on-brand);
   }
 
   .bento-row__dot {
@@ -1123,7 +1112,7 @@ h1, h2, h3, h4, h5 {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    color: #4ade80;
+    color: #f5c06a;
     font-size: 12px;
   }
 
@@ -1159,7 +1148,7 @@ h1, h2, h3, h4, h5 {
     height: 230px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(30, 168, 50, 0.32), transparent 66%);
+    background: radial-gradient(circle, rgba(245, 166, 35, 0.32), transparent 66%);
   }
 
   .bento-beam__cone {
@@ -1171,8 +1160,8 @@ h1, h2, h3, h4, h5 {
     height: 0;
     border-left: 74px solid transparent;
     border-right: 74px solid transparent;
-    border-top: 150px solid #1ea832;
-    filter: blur(0.5px) drop-shadow(0 0 26px rgba(30, 168, 50, 0.55));
+    border-top: 150px solid #f5a623;
+    filter: blur(0.5px) drop-shadow(0 0 26px rgba(245, 166, 35, 0.55));
   }
 
   .bento-beam__ray {
@@ -1182,7 +1171,7 @@ h1, h2, h3, h4, h5 {
     transform-origin: top center;
     width: 12px;
     height: 165px;
-    background: linear-gradient(to bottom, rgba(150, 245, 175, 0.75), rgba(30, 168, 50, 0));
+    background: linear-gradient(to bottom, rgba(255, 214, 145, 0.75), rgba(245, 166, 35, 0));
     border-radius: 999px;
   }
 
@@ -1227,8 +1216,8 @@ h1, h2, h3, h4, h5 {
     width: 22px;
     height: 22px;
     border-radius: 7px;
-    background: #1ea832;
-    color: #fff;
+    background: var(--brand);
+    color: var(--on-brand);
     display: inline-flex;
     align-items: center;
     justify-content: center;

@@ -30,7 +30,7 @@ export default function LanguageSwitcher({ locale, labels, page = 'home', tone =
   const idle = tone === 'light' ? '#8b8b93' : 'rgba(255,255,255,0.5)'
 
   const linkStyle = (active: boolean) => ({
-    color: active ? '#1ea832' : idle,
+    color: active ? '#f5a623' : idle,
     fontWeight: active ? 800 : 600,
     fontSize: 12,
     textDecoration: 'none',

@@ -4,7 +4,7 @@ export const uz: Dictionary = {
   meta: {
     title: "Yashirin kamera, GPS proslushka va diktofon Toshkentda | YASHIRIN CAMERA",
     description:
-      "YASHIRIN CAMERA - 2013 yildan beri ishonchli xizmat. Yashirin mini kameralar, GPS proslushka, professional diktofon va mikro naushniklar optom va chakana. 98 ta davlatga yetkazib berish, tezkor o'rnatish va sozlash. Tel: +998 95 040-40-20",
+      "YASHIRIN CAMERA - 2013 yildan beri ishonchli xizmat. Yashirin mini kameralar, GPS proslushka, professional diktofon va mikro naushniklar optom va chakana. 98 ta davlatga yetkazib berish, tezkor o'rnatish va sozlash. Tel: +998 99 086-99-99",
     keywords: [
       "yashirin kamera",
       "yashirin camera",

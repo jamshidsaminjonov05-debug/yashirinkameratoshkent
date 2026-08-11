@@ -11,7 +11,7 @@ export default function Pricing({ pricing, locale }: { pricing: Dictionary['pric
     <section id="narxlar" style={{ padding: '80px 0' }}>
       <div className="max-w-screen-xl mx-auto px-5">
         <div className="reveal text-center mb-12">
-          <p style={{ color: '#1ea832', fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', marginBottom: 8 }}>{pricing.eyebrow}</p>
+          <p style={{ color: '#f5a623', fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', marginBottom: 8 }}>{pricing.eyebrow}</p>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(28px, 5vw, 48px)', color: '#fff', marginBottom: 12 }}>{pricing.title}</h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: 520, margin: '0 auto', lineHeight: 1.7 }}>{pricing.subtitle}</p>
         </div>
@@ -26,10 +26,10 @@ export default function Pricing({ pricing, locale }: { pricing: Dictionary['pric
             >
               {plan.highlighted && (
                 <>
-                  <div style={{ position: 'absolute', top: -1, left: '50%', transform: 'translateX(-50%)', background: '#1ea832', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 16px', borderRadius: '0 0 8px 8px', letterSpacing: 1 }}>
+                  <div style={{ position: 'absolute', top: -1, left: '50%', transform: 'translateX(-50%)', background: '#f5a623', color: '#1b1710', fontSize: 10, fontWeight: 700, padding: '3px 16px', borderRadius: '0 0 8px 8px', letterSpacing: 1 }}>
                     {pricing.popular}
                   </div>
-                  <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 120%, rgba(30,168,50,0.08), transparent 60%)', pointerEvents: 'none' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 120%, rgba(245, 166, 35,0.08), transparent 60%)', pointerEvents: 'none' }} />
                 </>
               )}
               <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(26px, 3vw, 34px)', color: '#fff', lineHeight: 1.1 }}>

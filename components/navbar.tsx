@@ -42,7 +42,7 @@ export default function Navbar({ locale, nav, a11y }: Props) {
       aria-label={a11y.mainNav}
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: scrolled ? 'rgba(9,9,15,0.92)' : 'transparent',
+        background: scrolled ? 'rgba(20,17,24,0.92)' : 'transparent',
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
         borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
         transition: 'background 0.3s, backdrop-filter 0.3s',
@@ -106,7 +106,7 @@ export default function Navbar({ locale, nav, a11y }: Props) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            style={{ overflow: 'hidden', background: 'rgba(9,9,15,0.98)', borderTop: '1px solid rgba(255,255,255,0.06)' }}
+            style={{ overflow: 'hidden', background: 'rgba(20,17,24,0.98)', borderTop: '1px solid rgba(255,255,255,0.06)' }}
           >
             <div style={{ padding: '16px 20px' }}>
               {links.map((item, i) => (

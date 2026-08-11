@@ -8,7 +8,7 @@ export const metadata: Metadata = buildMetadata('ru')
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#09090f',
+  themeColor: '#141118',
   colorScheme: 'dark',
 }
 

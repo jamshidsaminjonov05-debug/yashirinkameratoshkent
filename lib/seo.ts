@@ -159,6 +159,8 @@ export function buildJsonLd(locale: Locale, page: PageKey = 'home') {
           '@id': `${SITE.url}/#logo`,
           url: abs(SITE.logo),
           contentUrl: abs(SITE.logo),
+          width: SITE.logoSize,
+          height: SITE.logoSize,
           caption: SITE.name,
         },
         telephone: [SITE.phone, SITE.phone2, SITE.servicePhone],
@@ -183,7 +185,7 @@ export function buildJsonLd(locale: Locale, page: PageKey = 'home') {
           { '@type': 'City', name: locale === 'ru' ? 'Ташкент' : 'Toshkent' },
           { '@type': 'Country', name: locale === 'ru' ? 'Узбекистан' : "O'zbekiston" },
         ],
-        sameAs: [SITE.telegram, SITE.telegramChannel],
+        sameAs: [SITE.instagram, SITE.telegram],
         hasOfferCatalog: { '@id': `${pageUrl}#catalog` },
       },
       {

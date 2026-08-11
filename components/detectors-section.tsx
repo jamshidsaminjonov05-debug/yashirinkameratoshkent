@@ -11,7 +11,7 @@ export default function DetectorsSection({ detectors, locale }: { detectors: Dic
 
   return (
     <section id="detektorlar" style={{ padding: '80px 0', position: 'relative', overflow: 'hidden' }}>
-      <div className="glow-orb" style={{ width: 400, height: 400, background: 'rgba(30,168,50,0.07)', top: 0, right: -100 }} />
+      <div className="glow-orb" style={{ width: 400, height: 400, background: 'rgba(245, 166, 35,0.07)', top: 0, right: -100 }} />
       <div className="max-w-screen-xl mx-auto px-5 relative" style={{ zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 48, alignItems: 'center' }}>
           {/* Vizual */}
@@ -23,7 +23,7 @@ export default function DetectorsSection({ detectors, locale }: { detectors: Dic
                   const PanelIcon = panelIcons[i] ?? IconSatellite
                   return (
                     <div key={item.name} className="flex items-center gap-3 mb-3">
-                      <span style={{ width: 44, height: 44, borderRadius: 13, background: 'linear-gradient(150deg, #1ea832, #178a2a)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 8px 20px rgba(30,168,50,0.28)' }} aria-hidden="true">
+                      <span style={{ width: 44, height: 44, borderRadius: 13, background: 'linear-gradient(150deg, #f5a623, #e0940f)', color: '#1b1710', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 8px 20px rgba(245, 166, 35,0.28)' }} aria-hidden="true">
                         <PanelIcon width={20} height={20} />
                       </span>
                       <div>
@@ -34,7 +34,7 @@ export default function DetectorsSection({ detectors, locale }: { detectors: Dic
                   )
                 })}
                 <div style={{ position: 'relative', height: 80, marginTop: 8 }} aria-hidden="true">
-                  <div className="flex items-center gap-2" style={{ position: 'absolute', left: 10, bottom: 0, background: '#1ea832', color: '#fff', borderRadius: 10, padding: '8px 14px', transform: 'rotate(-6deg)', fontSize: 11, fontWeight: 700 }}>
+                  <div className="flex items-center gap-2" style={{ position: 'absolute', left: 10, bottom: 0, background: '#f5a623', color: '#1b1710', borderRadius: 10, padding: '8px 14px', transform: 'rotate(-6deg)', fontSize: 11, fontWeight: 700 }}>
                     <ChipIconA width={14} height={14} />
                     <span>{detectors.panel.chips[0]}</span>
                   </div>

@@ -12,7 +12,7 @@ export default function CatalogSection({ catalog, locale }: { catalog: Dictionar
 
   return (
     <section id="katalog" style={{ padding: '80px 0', position: 'relative', overflow: 'hidden' }}>
-      <div className="glow-orb" style={{ width: 400, height: 400, background: 'rgba(30,168,50,0.07)', top: 0, left: -100 }} />
+      <div className="glow-orb" style={{ width: 400, height: 400, background: 'rgba(245, 166, 35,0.07)', top: 0, left: -100 }} />
       <div className="max-w-screen-xl mx-auto px-5 relative" style={{ zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 48, alignItems: 'center' }}>
           {/* Chap: matn + ro'yxat */}
@@ -40,7 +40,7 @@ export default function CatalogSection({ catalog, locale }: { catalog: Dictionar
               <div style={{ position: 'absolute', bottom: -40, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(140,80,30,0.5), transparent 70%)' }} />
               <div className="relative" style={{ zIndex: 1 }}>
                 <div className="flex items-center gap-2 mb-4">
-                  <span style={{ background: '#1ea832', color: '#fff', borderRadius: 6, width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }} aria-hidden="true">
+                  <span style={{ background: '#f5a623', color: '#1b1710', borderRadius: 6, width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }} aria-hidden="true">
                     <IconPlay width={10} height={10} />
                   </span>
                   <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 14 }}>{catalog.panel.groupTitle}</span>
@@ -69,7 +69,7 @@ export default function CatalogSection({ catalog, locale }: { catalog: Dictionar
                     const FeatureIcon = featureIcons[i] ?? IconSatellite
                     return (
                       <div key={item.name} className="flex items-center gap-3 mb-3">
-                        <span style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(30,168,50,0.16)', color: '#4ade80', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }} aria-hidden="true">
+                        <span style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(245, 166, 35,0.16)', color: '#f5c06a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }} aria-hidden="true">
                           <FeatureIcon width={19} height={19} />
                         </span>
                         <div>

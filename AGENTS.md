@@ -35,7 +35,7 @@ yoziladi, keyin `buildMetadata(locale, page)` va `app/sitemap.ts` avtomatik qamr
 - `app/(ru)/template.tsx`, `app/(uz)/template.tsx` — sahifalararo o'tish animatsiyasi
 - `app/globals.css` — Tailwind import + `:root` o'zgaruvchilar + `@layer components { ... }`
 - `app/fonts.ts` — next/font: Outfit (sarlavha) va Inter (matn, kirill)
-- `app/robots.ts`, `app/sitemap.ts`, `app/opengraph-image.tsx`, `app/icon.svg`
+- `app/robots.ts`, `app/sitemap.ts`, `app/opengraph-image.tsx`, `app/icon.png`, `app/apple-icon.png`
 - `components/home-page.tsx` — landing tuzilmasi; `components/shop/shop-page.tsx` — do'kon tuzilmasi
 - `components/animations/*` — GSAP va Motion yordamchilari (pastga qarang)
 - `components/shop/*` — do'kon: sidebar, filtrlar, narx slayderi, savat, mahsulot to'ri, ikonkalar
@@ -47,16 +47,20 @@ yoziladi, keyin `buildMetadata(locale, page)` va `app/sitemap.ts` avtomatik qamr
 
 ## Ma'lumot manbai
 
-Brend ma'lumotlari (nom, telefonlar, tajriba, yetkazib berish qamrovi) rasmiy Telegram
-kanalidan olingan: **https://t.me/yashirincamera** — 2013 yildan beri xizmat, 98 ta davlatga
-yetkazib berish, savdo raqamlari +998 95 040-40-20 / +998 95 040-40-60, servis +998 90 976-66-69.
+Brend ma'lumotlari (nom, telefonlar, tajriba, yetkazib berish qamrovi) rasmiy Instagram
+profilidan olingan: **https://www.instagram.com/yashirincamera.uz/** (253 ming obunachi) —
+2013 yildan beri xizmat, 98 ta davlatga yetkazib berish, savdo raqamlari
++998 99 086-99-99 / +998 93 811-99-99, servis +998 70 052-88-88,
+Telegram: **https://t.me/Yashirincamera_tashkent**.
 Mahsulot va narx ma'lumotlari egasining eski saytidan: **https://zbek.jimdofree.com/**
 
 - Kontakt, telefonlar va brend raqamlari — `lib/site.ts`
 - 25 ta mahsulot (nomi, narxi, tavsifi, rasmi) — `lib/content/uz.ts` va `ru.ts`
 - Mahsulot rasmlari — `public/img/products/*.webp` (fayl nomlari kalit so'zli)
 - Hero rasmi — `public/hero.webp` (qora fonda, `mix-blend-mode: screen` bilan fonga singadi)
-- Logotip — `public/logo.svg` (JSON-LD uchun) va `components/brand.tsx` (saytdagi so'z-logotip)
+- Logotip — `public/logo.png` (500x500, shaffof fon). Saytda `components/brand.tsx`:
+  `BrandMark` (faqat qush belgisi) va `BrandWordmark` (belgi + YASHIRIN CAMERA matni).
+  Favikon `app/icon.png` va `app/apple-icon.png` shu fayldan yasalgan (to'q `#221e27` fon ustida)
 
 ## Mahsulot rasmlari
 
@@ -112,9 +116,19 @@ Inline `style` ichiga `display` yozmang: u responsive klasslarni bekor qiladi
 Landing sahifa qorong'i mavzuda (`:root` o'zgaruvchilari), do'kon sahifasi yorug' mavzuda
 (`.shop` ichidagi `--shop-*` o'zgaruvchilari).
 
-Brend rangi — logotipdagi yashil `#1ea832`. Kodda hech qachon qattiq yozilmaydi, faqat
-`--brand`, `--brand-glow`, `--brand-dim`, `--border-brand` (qorong'i mavzu) va `--shop-accent`,
-`--shop-soft` (do'kon) orqali ishlatiladi. Rang o'zgarsa — shu o'zgaruvchilar tahrirlanadi.
+Brend ranglari — logotipdan (`public/logo.png`) olingan:
+
+| Rang | HEX | Nima uchun |
+| --- | --- | --- |
+| Sariq (yon "shoxlar") | `#f5a623` | Asosiy urg'u: tugmalar, havolalar, belgilar |
+| Kulrang (patlar, tumshuq) | `#a4a8ad` | Ikkilamchi urg'u, chiziqlar, ikonkalar |
+| To'q fon (logotip foni) | `#221e27` | Kartalar foni; sayt foni — undan to'qroq `#141118` |
+
+Kodda hech qachon qattiq yozilmaydi, faqat `--brand`, `--brand-glow`, `--brand-dim`,
+`--brand-silver`, `--on-brand` (sariq ustidagi qorong'i matn), `--border-brand` (qorong'i mavzu)
+va `--shop-accent`, `--shop-ink`, `--shop-soft` (do'kon) orqali ishlatiladi.
+Rang o'zgarsa — faqat shu o'zgaruvchilar tahrirlanadi. Sariq fon ustidagi matn doim
+`var(--on-brand)` bo'ladi — oq matn sariqda o'qilmaydi.
 
 ## Code quality
 

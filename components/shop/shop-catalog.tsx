@@ -350,7 +350,7 @@ export default function ShopCatalog({ shop, products, locale }: Props) {
                             <ProductImage src={product.image} alt={product.alt} label={shop.card.imageSoon} height={150} variant="light" />
                             <span
                               style={{
-                                position: 'absolute', top: 10, left: 10, background: 'rgba(30,168,50,0.95)', color: '#fff',
+                                position: 'absolute', top: 10, left: 10, background: 'rgba(245, 166, 35,0.95)', color: '#fff',
                                 fontSize: 10, fontWeight: 700, padding: '3px 9px', borderRadius: 999,
                               }}
                             >

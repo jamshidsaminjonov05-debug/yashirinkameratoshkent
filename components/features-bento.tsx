@@ -61,7 +61,7 @@ export default function FeaturesBento({ features }: { features: Dictionary['feat
               </div>
               <div className="bento-statcard__row bento-statcard__row--bottom">
                 <span data-counter className="bento-statcard__value">{features.stat.value}</span>
-                <Sparkline color="#4ade80" up />
+                <Sparkline color="#f5c06a" up />
               </div>
             </div>
           </article>

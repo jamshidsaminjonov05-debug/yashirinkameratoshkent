@@ -37,12 +37,12 @@ export default function Footer({ footer }: { footer: Dictionary['footer'] }) {
               </span>
               <span style={{ display: 'block' }}>{footer.hours}</span>
             </address>
-            <div className="flex gap-3 mt-3">
+            <div className="flex flex-col gap-1 mt-3">
+              <a href={SITE.instagram} className="footer-link" rel="noopener noreferrer" target="_blank" style={{ fontSize: 13, textDecoration: 'none' }}>
+                Instagram {SITE.instagramHandle}
+              </a>
               <a href={SITE.telegram} className="footer-link" rel="noopener noreferrer" target="_blank" style={{ fontSize: 13, textDecoration: 'none' }}>
                 Telegram {SITE.telegramHandle}
-              </a>
-              <a href={SITE.telegramChannel} className="footer-link" rel="noopener noreferrer" target="_blank" style={{ fontSize: 13, textDecoration: 'none' }}>
-                Kanal
               </a>
             </div>
           </div>

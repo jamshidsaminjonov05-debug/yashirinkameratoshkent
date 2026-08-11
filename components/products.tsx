@@ -19,7 +19,7 @@ export default function Products({ products, shopCard, locale }: Props) {
     <section id="mahsulotlar" style={{ padding: '80px 0' }}>
       <div className="max-w-screen-xl mx-auto px-5">
         <div className="reveal text-center mb-12">
-          <p style={{ color: '#1ea832', fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', marginBottom: 8 }}>{products.eyebrow}</p>
+          <p style={{ color: '#f5a623', fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', marginBottom: 8 }}>{products.eyebrow}</p>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(28px, 5vw, 48px)', color: '#fff', marginBottom: 12 }}>{products.title}</h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: 560, margin: '0 auto', lineHeight: 1.7 }}>{products.subtitle}</p>
         </div>
@@ -29,7 +29,7 @@ export default function Products({ products, shopCard, locale }: Props) {
             <HoverLift key={item.id} as="article" className="card card-hover" style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ position: 'relative' }}>
                 <ProductImage src={item.image} alt={item.alt} label={shopCard.imageSoon} height={200} />
-                <span style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(30,168,50,0.9)', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>{item.tag}</span>
+                <span style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(245, 166, 35,0.9)', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>{item.tag}</span>
               </div>
               <div style={{ padding: 20, display: 'flex', flexDirection: 'column', flex: 1 }}>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 18, marginBottom: 8, lineHeight: 1.3 }}>{item.name}</h3>
