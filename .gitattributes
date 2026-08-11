@@ -1,0 +1,28 @@
+# Git LFS ISHLATILMAYDI.
+#
+# Vercel repozitoriyni klon qilganda LFS obyektlarini yuklab olmaydi -
+# natijada rasmlar o'rniga matnli "pointer" fayllar qoladi va build
+# "Invalid PNG signature" xatosi bilan to'xtaydi.
+#
+# Bizning rasmlar kichik (10-130 KB, jami ~3 MB), shuning uchun ular
+# oddiy git obyekti sifatida saqlanadi.
+
+# Matnli fayllar - qator oxiri LF ga keltiriladi
+* text=auto eol=lf
+
+# Binar fayllar - hech qanday konvertatsiya qilinmasin
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.webp   binary
+*.avif   binary
+*.ico    binary
+*.pdf    binary
+*.woff   binary
+*.woff2  binary
+*.ttf    binary
+*.otf    binary
+*.mp4    binary
+*.webm   binary
+*.zip    binary

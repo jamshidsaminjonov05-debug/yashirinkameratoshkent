@@ -1,0 +1,1348 @@
+@import 'tailwindcss';
+
+:root {
+  --bg: #09090f;
+  --bg-card: #111119;
+  --bg-card2: #18181f;
+  /* Brend yashili - logotipdagi rang (YASHIRIN CAMERA) */
+  --brand: #1ea832;
+  --brand-glow: rgba(30, 168, 50, 0.25);
+  --brand-dim: rgba(30, 168, 50, 0.12);
+  --text: #f0f0f5;
+  --text-muted: #7a7a8c;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-brand: rgba(30, 168, 50, 0.5);
+  /* next/font orqali yuklanadi (app/fonts.ts).
+     Outfit'da kirill harflari yo'q - rus matnlari uchun Inter zaxira bo'ladi. */
+  --font-heading: var(--font-outfit), var(--font-inter), 'Segoe UI', sans-serif;
+  --font-body: var(--font-inter), 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(30, 168, 50, 0.3) transparent;
+}
+
+body::-webkit-scrollbar { width: 4px; }
+body::-webkit-scrollbar-track { background: transparent; }
+body::-webkit-scrollbar-thumb { background: rgba(30, 168, 50, 0.3); border-radius: 2px; }
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes barGrow {
+  from { height: 0; }
+  to { height: var(--bar-h); }
+}
+
+@keyframes lineGrow {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+
+@layer components {
+  .animate-fade-up {
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .animate-ticker {
+    animation: ticker 28s linear infinite;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  /*
+   * `.reveal` - GSAP ScrollTrigger uchun belgi (components/animations/gsap-animations.tsx).
+   * CSS orqali yashirilmaydi: JS ishlamasa ham matn ko'rinadi (SEO va a11y uchun).
+   */
+  .reveal,
+  .reveal-delay-1,
+  .reveal-delay-2,
+  .reveal-delay-3,
+  .reveal-delay-4,
+  .reveal-delay-5 {
+    will-change: transform, opacity;
+  }
+
+  /* Sarlavha so'zlari - GSAP ularni pastdan ko'taradi */
+  .hero-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+
+  .hero-word > span {
+    display: inline-block;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     YASHIRIN CAMERA so'z-logotipi (components/brand.tsx).
+     Barcha o'lchamlar --bh (umumiy balandlik) dan hisoblanadi.
+     ───────────────────────────────────────────────────────────── */
+  .brand-mark {
+    --bh: 30px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: calc(var(--bh) * 0.09) calc(var(--bh) * 0.22);
+    font-family: var(--font-heading);
+    color: #fff;
+    line-height: 1;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .brand-mark[data-tone='dark'] {
+    color: #14181d;
+  }
+
+  .brand-mark__corner {
+    position: absolute;
+    width: calc(var(--bh) * 0.3);
+    height: calc(var(--bh) * 0.38);
+    border: 0 solid currentColor;
+  }
+
+  .brand-mark__corner--tl {
+    top: 0;
+    left: 0;
+    border-top-width: calc(var(--bh) * 0.07);
+    border-left-width: calc(var(--bh) * 0.07);
+  }
+
+  .brand-mark__corner--br {
+    right: 0;
+    bottom: 0;
+    border-right-width: calc(var(--bh) * 0.07);
+    border-bottom-width: calc(var(--bh) * 0.07);
+  }
+
+  .brand-mark__stack {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .brand-mark__name {
+    font-size: calc(var(--bh) * 0.47);
+    font-weight: 900;
+    letter-spacing: 0.005em;
+    padding-bottom: calc(var(--bh) * 0.07);
+    border-bottom: calc(var(--bh) * 0.05) solid currentColor;
+  }
+
+  .brand-mark__sub {
+    margin-top: calc(var(--bh) * 0.1);
+    font-size: calc(var(--bh) * 0.2);
+    font-weight: 700;
+    letter-spacing: calc(var(--bh) * 0.062);
+    /* Harflar orasidagi bo'shliq oxirgi harfdan keyin ham qo'shiladi -
+       matnni qayta markazlash uchun shuncha o'ngga suramiz. */
+    text-indent: calc(var(--bh) * 0.062);
+    text-align: center;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .card-brand-border {
+    border-color: var(--border-brand);
+    box-shadow: 0 0 24px var(--brand-glow), inset 0 0 24px rgba(30, 168, 50, 0.04);
+  }
+
+  .btn-primary {
+    background: var(--brand);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 14px 32px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(30, 168, 50, 0.4);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 14px 32px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .card-hover {
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .card-hover:hover {
+    border-color: rgba(30, 168, 50, 0.35);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Ticker ustiga sichqoncha kelganda sekinlashadi */
+  .ticker-track {
+    animation: ticker 28s linear infinite;
+  }
+
+  .ticker-wrap:hover .ticker-track {
+    animation-play-state: paused;
+  }
+
+  /* Rasm hali yuklanmagan mahsulot uchun joy (shimmer) */
+  .image-placeholder {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(30, 168, 50, 0.12), transparent 65%),
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 12px, rgba(255, 255, 255, 0.05) 12px 24px);
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .image-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent);
+    animation: shimmer 2.4s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    60%, 100% { transform: translateX(100%); }
+  }
+
+  .footer-link {
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover {
+    color: #fff;
+  }
+
+  .brand-text { color: var(--brand); }
+  .muted-text { color: var(--text-muted); }
+
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .check-icon {
+    width: 28px;
+    height: 28px;
+    color: #fff;
+    background: var(--brand);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sparkline path {
+    stroke-dasharray: 200;
+    animation: lineGrow 1.5s ease forwards;
+  }
+
+  .bar-animate {
+    animation: barGrow 1s ease forwards;
+    animation-delay: var(--bar-delay, 0s);
+  }
+
+  /* Klaviatura bilan navigatsiya uchun ko'rinadigan fokus (a11y + SEO) */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 999;
+    background: var(--brand);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 0 0 8px 0;
+    font-size: 14px;
+  }
+
+  .skip-link:focus {
+    left: 0;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     ONLAYN DO'KON (/magazin/, /uz/dokon/) - yorug' mavzu
+     ───────────────────────────────────────────────────────────── */
+  .shop {
+    --shop-bg: #ececec;
+    --shop-surface: #ffffff;
+    --shop-panel: #fbfbfb;
+    --shop-text: #17171a;
+    --shop-muted: #8b8b93;
+    --shop-border: #ededf0;
+    --shop-accent: #1ea832;
+    --shop-soft: #e9f8ed;
+
+    min-height: 100vh;
+    background: var(--shop-bg);
+    color: var(--shop-text);
+    font-family: var(--font-body);
+    padding: 24px 20px 40px;
+  }
+
+  .shop-app {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 248px minmax(0, 1fr);
+    background: var(--shop-surface);
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(15, 15, 20, 0.12);
+  }
+
+  .shop-aside {
+    border-right: 1px solid var(--shop-border);
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .shop-main {
+    background: var(--shop-panel);
+    min-width: 0;
+  }
+
+  .shop-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 11px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 12px;
+    color: #3c3c43;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+    font-family: inherit;
+  }
+
+  .shop-nav-item:hover {
+    background: #f5f5f7;
+    color: #17171a;
+  }
+
+  .shop-nav-item[data-active='true'] {
+    background: var(--shop-soft);
+    color: #15803d;
+    font-weight: 600;
+  }
+
+  .shop-sub-item {
+    display: block;
+    padding: 9px 12px 9px 44px;
+    border-radius: 10px;
+    color: #6c6c75;
+    font-size: 13.5px;
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s;
+  }
+
+  .shop-sub-item:hover {
+    background: #f5f5f7;
+    color: #17171a;
+  }
+
+  .shop-sub-item[data-active='true'] {
+    background: var(--shop-soft);
+    color: #15803d;
+    font-weight: 600;
+  }
+
+  .shop-card {
+    background: var(--shop-surface);
+    border: 1px solid var(--shop-border);
+    border-radius: 18px;
+  }
+
+  .shop-input {
+    width: 100%;
+    border: 1px solid var(--shop-border);
+    background: var(--shop-surface);
+    border-radius: 999px;
+    padding: 10px 16px 10px 40px;
+    font-size: 13.5px;
+    color: var(--shop-text);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .shop-input:focus {
+    border-color: var(--shop-accent);
+    box-shadow: 0 0 0 3px rgba(30, 168, 50, 0.14);
+  }
+
+  .shop-input::placeholder {
+    color: var(--shop-muted);
+  }
+
+  .shop-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+    padding: 12px 14px;
+    border: 1px solid var(--shop-border);
+    border-radius: 12px;
+    background: var(--shop-surface);
+    color: var(--shop-text);
+    font-size: 13.5px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .shop-select:hover {
+    border-color: #dcdce2;
+    background: #fcfcfd;
+  }
+
+  .shop-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 999px;
+    padding: 11px 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    text-decoration: none;
+    background: var(--shop-accent);
+    color: #fff;
+    transition: box-shadow 0.2s, background 0.2s;
+  }
+
+  .shop-btn:hover {
+    background: #178a2a;
+    box-shadow: 0 10px 24px rgba(30, 168, 50, 0.32);
+  }
+
+  .shop-btn--ghost {
+    background: var(--shop-surface);
+    color: var(--shop-text);
+    border: 1px solid var(--shop-border);
+  }
+
+  .shop-btn--ghost:hover {
+    background: #f6f6f8;
+    box-shadow: none;
+  }
+
+  .shop-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: 1px solid var(--shop-border);
+    background: var(--shop-surface);
+    color: #4a4a52;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s, border-color 0.18s;
+  }
+
+  .shop-icon-btn:hover {
+    background: var(--shop-soft);
+    border-color: rgba(30, 168, 50, 0.4);
+    color: var(--shop-accent);
+  }
+
+  .shop-icon-btn[data-active='true'] {
+    background: var(--shop-accent);
+    border-color: var(--shop-accent);
+    color: #fff;
+  }
+
+  .shop-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 13px;
+    color: #4a4a52;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .shop-checkbox input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .shop-checkbox .box {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid #d7d7dd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.18s, border-color 0.18s;
+  }
+
+  .shop-checkbox input:checked + .box {
+    background: var(--shop-accent);
+    border-color: var(--shop-accent);
+  }
+
+  .shop-checkbox input:focus-visible + .box {
+    outline: 2px solid var(--shop-accent);
+    outline-offset: 2px;
+  }
+
+  .shop-count {
+    margin-left: auto;
+    color: var(--shop-muted);
+    font-size: 12px;
+  }
+
+  .shop-product-card {
+    background: var(--shop-surface);
+    border: 1px solid var(--shop-border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .image-placeholder--light {
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(30, 168, 50, 0.1), transparent 65%),
+      repeating-linear-gradient(135deg, #f4f4f6 0 12px, #eeeef1 12px 24px);
+    color: #a1a1aa;
+  }
+
+  .image-placeholder--light::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  }
+
+  /* Ikki tutqichli narx slayderi */
+  .range-input {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    margin: 0;
+    background: none;
+    pointer-events: none;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .range-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    pointer-events: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--shop-accent);
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+    cursor: grab;
+  }
+
+  .range-input::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.12);
+  }
+
+  .range-input::-moz-range-thumb {
+    pointer-events: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--shop-accent);
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+    cursor: grab;
+  }
+
+  @media (min-width: 1024px) {
+    .shop-content {
+      grid-template-columns: 236px minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .shop-filter-col {
+      position: sticky;
+      top: 18px;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .shop {
+      padding: 12px 10px 28px;
+    }
+
+    .shop-app {
+      grid-template-columns: minmax(0, 1fr);
+      border-radius: 18px;
+    }
+
+    .shop-aside {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     HERO - markazlashtirilgan, mobile-first
+     ───────────────────────────────────────────────────────────── */
+  .hero-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 104px 0 0;
+  }
+
+  .hero-inner {
+    width: 100%;
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .hero-glow {
+    width: 340px;
+    height: 340px;
+    background: rgba(30, 168, 50, 0.16);
+    top: -110px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Belgi: bitta qo'shilgan "pill" (yashil + qorong'i qism) */
+  .hero-badges {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 auto 22px;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    max-width: 100%;
+  }
+
+  .hero-badge--new {
+    background: #1ea832;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 5px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .hero-badge--link {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 12.5px;
+    padding: 5px 12px 5px 2px;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.2s;
+  }
+
+  .hero-badge--link:hover {
+    color: #fff;
+  }
+
+  .hero-title {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: clamp(32px, 8.6vw, 76px);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin: 0 auto 16px;
+    max-width: 18ch;
+    text-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
+    text-wrap: balance;
+  }
+
+  .hero-desc {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 28px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  /* Mahsulot rasmi - markazda, matn ostida */
+  .hero-bg {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    height: 320px;
+    margin: 20px auto 0;
+    z-index: 0;
+    /* Rasm "screen" rejimida shu fon bilan aralashadi -> qora to'rtburchak ko'rinmaydi */
+    background: var(--bg);
+  }
+
+  .hero-bg__img {
+    object-fit: contain;
+    object-position: center bottom;
+    /* Rasmning qop-qora foni sayt foniga singib ketadi */
+    mix-blend-mode: screen;
+  }
+
+  .hero-bg__fade {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: 0;
+    height: 22%;
+    background: linear-gradient(to bottom, rgba(9, 9, 15, 0) 0%, var(--bg) 92%);
+    pointer-events: none;
+  }
+
+  .hero-panel {
+    position: relative;
+    z-index: 1;
+    margin-top: -18px;
+  }
+
+  @media (min-width: 480px) {
+    .hero-bg {
+      height: 380px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-section {
+      padding-top: 124px;
+    }
+
+    .hero-title {
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      margin-bottom: 34px;
+    }
+
+    .hero-bg {
+      max-width: 620px;
+      height: 440px;
+      margin-top: 28px;
+    }
+
+    .hero-panel {
+      margin-top: -24px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-section {
+      padding-top: 140px;
+    }
+
+    .hero-glow {
+      width: 520px;
+      height: 520px;
+      top: -170px;
+    }
+
+    .hero-title {
+      max-width: 15ch;
+    }
+
+    .hero-bg {
+      max-width: 680px;
+      height: 480px;
+      margin-top: 34px;
+    }
+  }
+
+  /* Juda kichik ekranda tugmalar to'liq kenglikda */
+  @media (max-width: 419px) {
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero-actions .btn-primary,
+    .hero-actions .btn-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Umumiy bo'lim sarlavhalari
+     ───────────────────────────────────────────────────────────── */
+  .section-eyebrow {
+    color: var(--brand);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(26px, 5vw, 46px);
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 auto 12px;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+
+  .section-subtitle {
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     BENTO to'r
+     ───────────────────────────────────────────────────────────── */
+  .bento-section {
+    padding: 72px 0;
+  }
+
+  .bento {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1fr;
+  }
+
+  .bento-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    background: linear-gradient(180deg, #121218 0%, #0d0d13 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
+  }
+
+  .bento-card::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -45%;
+    width: 130%;
+    height: 80%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(30, 168, 50, 0.16), transparent 68%);
+    pointer-events: none;
+  }
+
+  .bento-head {
+    text-align: center;
+    padding: 26px 22px 6px;
+  }
+
+  .bento-foot {
+    margin-top: auto;
+    padding: 20px 22px 24px;
+  }
+
+  .bento-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 21px;
+    color: #fff;
+    margin: 0 0 8px;
+  }
+
+  .bento-title--left {
+    text-align: left;
+  }
+
+  .bento-desc {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 34ch;
+  }
+
+  .bento-desc--left {
+    margin: 0;
+    text-align: left;
+  }
+
+  .bento-rows {
+    margin-top: 22px;
+    padding-left: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bento-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    border-radius: 14px 0 0 14px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-right: 0;
+    white-space: nowrap;
+    min-width: 108%;
+  }
+
+  .bento-row--active {
+    background: linear-gradient(90deg, #1ea832, #3ad053);
+    border-color: transparent;
+    box-shadow: 0 10px 26px rgba(30, 168, 50, 0.28);
+  }
+
+  .bento-row__icon {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .bento-row--active .bento-row__icon { color: #fff; }
+
+  .bento-row__id {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: var(--font-heading);
+  }
+
+  .bento-row--active .bento-row__id,
+  .bento-row--active .bento-row__label,
+  .bento-row--active .bento-row__dot {
+    color: #fff;
+  }
+
+  .bento-row__dot {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.32);
+  }
+
+  .bento-row__label {
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bento-statcard {
+    margin: 22px 18px;
+    padding: 16px 18px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    position: relative;
+    z-index: 1;
+  }
+
+  .bento-statcard__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .bento-statcard__row--bottom {
+    margin-top: 6px;
+  }
+
+  .bento-statcard__label {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 10.5px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+  }
+
+  .bento-statcard__change {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #4ade80;
+    font-size: 12px;
+  }
+
+  .bento-statcard__value {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 34px;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .bento-card--create {
+    min-height: 320px;
+  }
+
+  .bento-beam {
+    position: relative;
+    flex: 1;
+    min-height: 190px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Ikonka ortidagi yumshoq yashil yorug'lik */
+  .bento-beam::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 230px;
+    height: 230px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(30, 168, 50, 0.32), transparent 66%);
+  }
+
+  .bento-beam__cone {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 74px solid transparent;
+    border-right: 74px solid transparent;
+    border-top: 150px solid #1ea832;
+    filter: blur(0.5px) drop-shadow(0 0 26px rgba(30, 168, 50, 0.55));
+  }
+
+  .bento-beam__ray {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform-origin: top center;
+    width: 12px;
+    height: 165px;
+    background: linear-gradient(to bottom, rgba(150, 245, 175, 0.75), rgba(30, 168, 50, 0));
+    border-radius: 999px;
+  }
+
+  .bento-beam__icon {
+    position: relative;
+    width: 74px;
+    height: 74px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: linear-gradient(160deg, #33333f, #17171e);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  }
+
+  .bento-card--sections {
+    min-height: 280px;
+  }
+
+  .bento-tree {
+    position: relative;
+    margin: 0 0 0 auto;
+    padding: 16px 18px 20px;
+    width: 100%;
+    border-radius: 18px 0 0 0;
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    border-left: 1px solid rgba(255, 255, 255, 0.07);
+    z-index: 1;
+  }
+
+  .bento-tree__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .bento-tree__mark {
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    background: #1ea832;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1px;
+  }
+
+  .bento-tree__name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  .bento-tree__caret {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-muted);
+  }
+
+  .bento-tree__dot {
+    margin-left: auto;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  .bento-tree__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .bento-tree__icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-muted);
+  }
+
+  .bento-tree__label { font-size: 13.5px; color: #fff; }
+
+  .bento-tree__label--sub { color: rgba(255, 255, 255, 0.55); }
+
+  .bento-tree__spark {
+    position: absolute;
+    display: inline-flex;
+    color: rgba(203, 189, 255, 0.85);
+    filter: drop-shadow(0 0 12px rgba(190, 170, 255, 0.5));
+  }
+
+  .bento-tree__spark--sm { top: 18px; right: 44px; }
+  .bento-tree__spark--lg { top: 32px; right: 14px; opacity: 0.55; }
+
+  @media (min-width: 700px) {
+    .bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bento-card--sections {
+      grid-column: span 2;
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .bento-foot--side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 0 0 45%;
+      margin: 0;
+      padding: 26px 22px;
+    }
+
+    .bento-tree {
+      flex: 1;
+      margin-top: 18px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .bento-section {
+      padding: 88px 0;
+    }
+
+    .bento {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .bento-card--create {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+    }
+
+    .bento-card--sections {
+      grid-column: 1 / span 2;
+      grid-row: 2;
+    }
+  }
+
+  /* Mobil menyu tugmasi - desktopda ko'rinmaydi */
+  .burger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  @media (min-width: 768px) {
+    .burger {
+      display: none;
+    }
+  }
+}

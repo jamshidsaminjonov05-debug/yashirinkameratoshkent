@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Next.js statik eksport rejimida build qilinadi -> `out/` papkasi
+NEXT_OUTPUT=export pnpm run build
+figma make deploy --build-dir out
