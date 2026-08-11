@@ -15,3 +15,4 @@ npm start          # build qilingan saytni ishga tushirish
 Batafsil: [AGENTS.md](AGENTS.md)
 "# yashirincamera" 
 "# yashirinkameratoshkent" 
+"# yashirinkameratoshkent" 
